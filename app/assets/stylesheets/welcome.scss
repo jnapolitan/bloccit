@@ -2,27 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h1 {
-  color: red;
-}
-
-#index-title {
+.social-btn {
+  position: static;
+  border: 2px solid #55acee;
+  padding: 10px;
+  background-color: #f2f2f2;
+  width: 100px;
   text-align: center;
-  font-size: 15px;
-  color: blue;
-}
-
-.posts {
-  border: solid;
-  margin: 5px;
-  padding: 5px;
-  height: 200px;
-}
-
-section {
-  background: #5998ff;
-  border-style: solid;
-  border-width: 5px;
-  margin: 5px 5px 5px 5px;
-  padding: 5px 5px 5px 5px;
 }
