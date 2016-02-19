@@ -1,9 +1,15 @@
 require 'rails_helper'
+require 'random_data'
 
 RSpec.describe Post, type: :model do
 
+  let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
 
-  let(:post) { Post.create!(title: "New Post Title", body: "New Post Body") }
+  let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
+
+  it { is_expected.to belong_to(:topic) }
+
+
 
   describe "attributes" do
     it "responds to title" do
