@@ -20,6 +20,17 @@
 
 .user-info {
   margin-top: 9px;
+  margin-bottom: 9px;
+  height: 90px;
+}
+
+.user-info img {
+  border: 2px solid #337AB7;
+}
+
+.user-info p {
+  font-weight: bold;
+  text-align: right;
 }
 
 .nav {
