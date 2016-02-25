@@ -16,9 +16,11 @@
       </div>
       <% end %>
     </div>
-    <% if user_is_authorized_for_topics? %>
+
     <div class="col-md-4">
-      <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+      <% if user_is_admin? %>
+        <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+      <% end %> 
     </div>
-    <% end %>
+
   </div>
