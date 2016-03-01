@@ -11,24 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224042752) do
-
-  create_table "advertisements", force: :cascade do |t|
-    t.string   "title"
-    t.text     "copy"
-    t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20160229192433) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -41,25 +35,6 @@ ActiveRecord::Schema.define(version: 20160224042752) do
 
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
-
-  create_table "questions", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.boolean  "resolved"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sponsored_posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "price"
-    t.integer  "topic_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "sponsored_posts", ["topic_id"], name: "index_sponsored_posts_on_topic_id"
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
