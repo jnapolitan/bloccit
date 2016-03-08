@@ -13,10 +13,12 @@
     </p>
     <div>
       <h3>Comments</h3>
-      <%= render @topic.comments %>
+      <% @topic.comments.each do |topic_comment| %>
+        <%= render partial: "comments/comment", locals: { comment: topic_comment } %>
+      <% end %>
     </div>
     <% if current_user %>
-      <%= render 'comments/form', comment: Comment.new, topic: @topic %>
+      <%= render 'comments/form', { comment: @comment, topic: @topic }%>
     <% end %>
     <% @topic.posts.each do |post| %>
       <div class="media">
