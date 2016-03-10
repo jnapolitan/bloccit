@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  after_create :create_favorite, :send_author_email
+
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
@@ -32,4 +34,15 @@ class Post < ActiveRecord::Base
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
   end
+
+  private
+
+  def create_favorite
+    user.favorites.create!(post: self)
+  end
+
+  def send_author_email
+    FavoriteMailer.new_post(self.user, self).deliver_now
+  end
+
 end

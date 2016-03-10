@@ -82,4 +82,24 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+
+  describe "#after_create" do
+    it "automatically favorites the new post" do
+      new_post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect(new_post.favorites.count).to eq 1
+    end
+
+    it "associates the favorite with the post user" do
+      new_post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect( new_post.favorites.last.user ).to eq new_post.user
+    end
+
+    it "sends a notification to the post author" do
+      @another_post = topic.posts.create(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      favorite = user.favorites.create(post: @another_post)
+      expect(FavoriteMailer).to receive(:new_post).with(user, @another_post).and_return(double(deliver_now: true))
+
+      @another_post.save
+    end
+  end
 end
