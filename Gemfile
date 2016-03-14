@@ -12,12 +12,13 @@ source 'https://rubygems.org'
  group :development do
    gem 'sqlite3'
    gem 'pry-rails'
-   gem 'better_errors'
  end
 
  group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda'
+  gem 'better_errors'
+  gem 'factory_girl_rails', "~> 4.0"
  end
 
  gem 'bootstrap-sass'
