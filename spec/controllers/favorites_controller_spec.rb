@@ -41,6 +41,10 @@ RSpec.describe FavoritesController, type: :controller do
         post :create, { post_id: my_post.id }
         expect(my_user.favorites.find_by_post_id(my_post.id)).not_to be_nil
       end
+
+      it "increases the number of favorites by 1" do
+        expect{ post :create, post_id: my_post.id, favorite: {value: 1} }.to change(Favorite,:count).by(1)
+      end
     end
 
     describe "DELETE destroy" do

@@ -1,26 +1,34 @@
 <div class="row">
-   <div class="col-md-8">
-     <div class="media">
-       <br />
-       <% avatar_url = @user.avatar_url(128) %>
-       <% if avatar_url %>
-         <div class="media-left">
-           <%= image_tag avatar_url, class: 'media-object' %>
-         </div>
-       <% end %>
-       <div class="media-body">
-         <h2 class="media-heading"><%= @user.name %></h2>
-         <small>
-           <%= pluralize(@user.posts.count, 'post') %>,
-           <%= pluralize(@user.comments.count, 'comment') %>
-         </small>
-       </div>
-     </div>
-   </div>
- </div>
+  <div class="col-md-8">
+    <div class="media">
+      <br />
+      <% avatar_url = @user.avatar_url(128) %>
+      <% if avatar_url %>
+      <div class="media-left">
+        <%= image_tag avatar_url, class: 'media-object' %>
+      </div>
+      <% end %>
+      <div class="media-body">
+        <h2 class="media-heading"><%= @user.name %></h2>
+        <small>
+          <%= pluralize(@user.posts.count, 'post') %>,
+          <%= pluralize(@user.comments.count, 'comment') %>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
 
- <h2>Posts</h2>
- <%= render @user.posts %>
+<% if no_posts_or_comments_or_favorites?(@user) %>
+  <h2><%= "#{@user.name} has literally zero posts, comments and favorites." %></h2>
+<% else %>
 
- <h2>Comments</h2>
- <%= render @user.comments %>
+  <h2>Posts</h2>
+  <%= render @user.posts %>
+
+  <h2>Comments</h2>
+  <%= render @user.comments %>
+
+  <h2>Favorites</h2>
+  <%= render partial: 'favorites/list', locals: { user: @user } %>
+<% end %>

@@ -8,7 +8,7 @@ RSpec.describe CommentsController, type: :controller do
   let(:other_user) { create(:user) }
   let(:my_topic) { create(:topic) }
   let(:my_post) { create(:post) }
-  let(:my_comment) { create(:comment) }
+  let(:my_comment) { create(:comment, user: my_user, post: my_post) }
 
   context "guest" do
     describe "POST create" do

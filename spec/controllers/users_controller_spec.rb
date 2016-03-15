@@ -2,13 +2,16 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
 
-  let(:new_user_attributes) do
+    let(:user) { create(:user) }
+
+    let(:new_user_attributes) do
     {
       name: "BlocHead",
       email: "blochead@bloc.io",
       password: "blochead",
       password_confirmation: "blochead"
     }
+
   end
 
   describe "GET new" do
@@ -78,9 +81,14 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to render_template :show
     end
 
-    it "assigns factoru_user to @user" do
+    it "assigns factory_user to @user" do
       get :show, { id: factory_user.id }
       expect(assigns(:user)).to eq(factory_user)
+    end
+
+    it "validates the presence of favorties" do
+      get :show, { id: factory_user.id }
+      expect(factory_user.favorites.count).to_not be_nil
     end
   end
 end
